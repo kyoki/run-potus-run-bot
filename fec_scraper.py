@@ -85,6 +85,6 @@ for candidate in candidates:
     print(message)
     already_posted.append(id)
     twitter_api.PostUpdate(message)
-    sleep(900)
+    sleep(os.environ.get('SLEEP_TIME', 900))
 
 r.set('already_posted', json.dumps(already_posted))
