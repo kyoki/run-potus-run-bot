@@ -3,6 +3,7 @@ import json
 import os
 import redis
 import requests
+import time
 import twitter
 
 
@@ -32,7 +33,7 @@ full_list = requests.request(
 )
 full_count = full_list.json()['pagination']['count']
 end_date_string = end_date.strftime('%Y-%m-%d')
-message = f'As of {end_date_string}, {full_count} have filed with the FEC to run for president in the 2020 election.'
+message = f'As of {end_date_string}, {full_count} candidates have registered with the FEC to run for president in the 2020 election.'
 twitter_api.PostUpdate(message)
 
 params['max_first_file_date'] = end_date_string
@@ -85,6 +86,6 @@ for candidate in candidates:
     print(message)
     already_posted.append(id)
     twitter_api.PostUpdate(message)
-    sleep(os.environ.get('SLEEP_TIME', 900))
+    time.sleep(os.environ.get('SLEEP_TIME', 900))
 
 r.set('already_posted', json.dumps(already_posted))
