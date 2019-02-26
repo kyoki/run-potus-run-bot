@@ -13,7 +13,7 @@ twitter_api = twitter.Api(
     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET'],
 )
 
-r = redis.Redis.from_url(os.environ['REDIS_URL'])
+r = redis.Redis.from_url(os.environ['HEROKU_REDIS_IVORY_URL'])
 already_posted = r.get('already_posted') or b'[]'
 already_posted = json.loads(already_posted.decode('utf-8'))
 
