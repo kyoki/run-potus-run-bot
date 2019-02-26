@@ -59,7 +59,8 @@ if pagination['pages'] > 1:
 fh = open('parties.json', 'r')
 parties = json.loads(fh.read().strip())
 fh.close()
-        
+
+list.sort(candidates, key=lambda c: c['last_f2_date'])
 for candidate in candidates:
     id = candidate['candidate_id']
     if id in already_posted:
@@ -77,15 +78,13 @@ for candidate in candidates:
     party_message = ''
     if party and party in parties:
         party_message = parties[party]
-    message = f'On {f2_date} {name} registered to run for President{party_message}.'
+    message = f'On {f2_date}, {name} registered to run for President{party_message}.'
     if committee:
         message += f' Their principal campaign committee is {committee}.'
     else:
         message += f' They do not have a principal compaign committee.'
-    
-    print(message)
+
     already_posted.append(id)
+    r.set('already_posted', json.dumps(already_posted))
     twitter_api.PostUpdate(message)
     time.sleep(int(os.environ.get('SLEEP_TIME', '900')))
-
-r.set('already_posted', json.dumps(already_posted))
