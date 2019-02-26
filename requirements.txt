@@ -4,7 +4,6 @@ certifi==2018.11.29
 chardet==3.0.4
 decorator==4.3.2
 future==0.17.1
-GDAL==2.3.0
 idna==2.8
 ipdb==0.11
 ipython==7.3.0
