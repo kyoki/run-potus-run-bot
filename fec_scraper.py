@@ -83,6 +83,7 @@ for candidate in candidates:
         message += f' Their principal campaign committee is {committee}.'
     else:
         message += f' They do not have a principal compaign committee.'
+    message += f' See https://www.fec.gov/data/candidate/{id}/?tab=filings for more.'
 
     already_posted.append(id)
     r.set('already_posted', json.dumps(already_posted))
