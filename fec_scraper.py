@@ -19,7 +19,7 @@ already_posted = r.get('already_posted') or b'[]'
 already_posted = json.loads(already_posted.decode('utf-8'))
 
 end_date = datetime.date.today()
-start_date = end_date - datetime.timedelta(days=5)
+start_date = end_date - datetime.timedelta(days=10)
 params = {
     'api_key': os.environ['FEC_KEY'],
     'election_year': '2020',
@@ -81,8 +81,8 @@ for candidate in candidates:
     message = f'On {f2_date}, {name} registered to run for President{party_message}.'
     if committee:
         message += f' Their principal campaign committee is {committee}.'
-    else:
-        message += f' They do not have a principal compaign committee.'
+    elif f2_date != start_date:
+        continue
     message += f' See https://www.fec.gov/data/candidate/{id}/?tab=filings for more.'
 
     already_posted.append(id)
