@@ -70,7 +70,8 @@ for candidate in candidates:
     if candidate['principal_committees']:
         committee = list(filter(
             lambda c: c['last_file_date'] == file_date, candidate['principal_committees']
-        ))[0]['name']
+        ))
+        committee = committee[0]['name'] if committee else candidate['principal_committees'][0]['name']
     else:
         committee = None
     name = candidate['name']
