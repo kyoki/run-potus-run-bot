@@ -79,6 +79,8 @@ for candidate in candidates:
     party_message = ''
     if party and party in parties:
         party_message = parties[party]
+        if not party_message:
+            party_message = ' without a party'
     message = f'On {f2_date}, {name} registered to run for President{party_message}.'
     if committee:
         message += f' Their principal campaign committee is {committee}.'
